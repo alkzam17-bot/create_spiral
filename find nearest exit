@@ -1,0 +1,44 @@
+def nearestExit(maze):
+   moves = [(-1,0),(1,0),(0,-1),(0,1)]
+   steps = 0
+   queue = []
+   found = False
+
+   for r in range(len(maze)):
+    for c in range(len(maze[r])):
+      if maze[r][c] == "E":
+        queue = [(r, c)]
+        visited = set([(r, c)])
+        found = True
+        break
+    if found:
+      break
+
+   while queue:
+    row, col = queue.pop(0)
+
+    for move in moves:
+
+      next_coord = (row + move[0], col + move[1])
+      r, c = next_coord
+      print(next_coord)
+
+      if ((row == len(maze)-1 or row == 0) or (col == 0 or col == 3)) and maze[row][col] == ".":
+        return steps
+
+      if 0 <= r < len(grid) and 0 <= c < len(grid[0]):
+        if maze[r][c] == "." and next_coord not in visited:
+          queue.append(next_coord)
+          visited.add(next_coord)
+
+      steps += 1
+    return steps
+
+
+maze = [
+["+", "+", ".", "+"],
+[".", ".", ".", "+"],
+["+", "+", "+", "."],
+["+", "E", ".", "+"]
+]
+print(nearestExit(maze))
