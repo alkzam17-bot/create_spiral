@@ -23,7 +23,7 @@ def spiralize(size):
 
 
 #create spiral with visulaisation
-def spiralize(size):
+def spiralize_with_visualisation(size):
   n = size-1 #subsititute of size
   checkpoints = [[1 for _ in range(size)]] + [[0 for _ in range(size)] for _ in range(n)]
   snake_coord = [0, n] #eg size = 10, snake_coord = [y=0, x=9]
