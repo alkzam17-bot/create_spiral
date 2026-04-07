@@ -1,0 +1,28 @@
+def num_islands(grid):
+  moves = [(-1,0),(1,0),(0,-1),(0,1)]
+  count = 0
+
+  for r in range(len(grid)):
+    for c in range(len(grid[r])):
+      if grid[r][c] == "1":
+        queue = [(r,c)]
+        grid[r][c] = "0"
+        count += 1
+        while queue:
+          r, c = queue.pop(0)
+          for move in moves:
+            nextLand = (r+move[0], c+move[1])
+            if 0 <= nextLand[0] <= len(grid)-1 and 0 <= nextLand[1] <= len(grid[0])-1:
+              if grid[nextLand[0]][nextLand[1]] == "1":
+                queue.append(nextLand)
+                grid[nextLand[0]][nextLand[1]] = "0"
+  return count
+
+
+
+grid = [
+["1","1","0"],
+["1","0","1"],
+["0","1","1"]
+]
+print(num_islands(grid))
