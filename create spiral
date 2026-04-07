@@ -1,0 +1,68 @@
+def spiralize(size):
+  n = size-1
+  checkpoints = [[1 for _ in range(size)]] + [[0 for _ in range(size)] for _ in range(n)]
+  snake_coord = [0, n]
+  travel = [1, -1]
+  axis = 0
+
+  while n >= 2:
+    for path in range(2):
+      axis = 0 if path == 0 else 1
+      for step in range(n):
+        snake_coord[axis] += travel[axis]
+        checkpoints[snake_coord[0]][snake_coord[1]] = 1
+      travel[axis] *= -1
+      if path == 1:
+        n -= 2
+  if n == 1:
+    axis = 0 if axis == 1 else 1
+    snake_coord[axis] += travel[axis]
+    checkpoints[snake_coord[0]][snake_coord[1]] = 1
+  return checkpoints
+
+
+
+#create spiral with visulaisation
+def spiralize(size):
+  n = size-1 #subsititute of size
+  checkpoints = [[1 for _ in range(size)]] + [[0 for _ in range(size)] for _ in range(n)]
+  snake_coord = [0, n] #eg size = 10, snake_coord = [y=0, x=9]
+  travel = [1, -1]
+  axis = 0 #start with y axis, y=arg 0 & x=arg 2
+
+  while n >= 2:
+    print("New Path!")
+    if travel[axis] == 1 and axis == 0: message = "snake going down"
+    elif travel[axis] == -1 and axis == 0: message = "snake going up"
+    elif travel[axis] == 1 and axis == 1: message = "snake going right"
+    elif travel[axis] == -1 and axis == 1: message = "snake going left"
+    print(f"axis = {axis} ({"y" if axis == 0 else "x"} axis), travel = {travel[axis]} ({message})")
+    for path in range(2):
+      print(f"path -> with {n} steps")
+      if path == 0: axis = 0 #if first path (path=0) = y axis
+      elif path == 1: axis = 1 #if second path (path=1) = x axis
+      for step in range(n):
+        print(f"snake travelled to {snake_coord}")
+        snake_coord[axis] += travel[axis]
+        checkpoints[snake_coord[0]][snake_coord[1]] = 1 #checked the next step
+      travel[axis] *= -1
+      if path == 1:
+        n -= 2 #set up the number of steps for the next two path, now that we finished the two paths
+    print('')
+  print("Final Path")
+  if size%2 == 0:
+    if axis == 0: axis = 1
+    elif axis == 1: axis = 0
+    print(f"axis = {axis} ({"y" if axis == 0 else "x"} axis), travel = {travel[axis]})")
+    snake_coord[axis] += travel[axis]
+    checkpoints[snake_coord[0]][snake_coord[1]] = 1
+
+  else:
+    for path in range(2):
+      for step in range(n):
+        print(f"axis = {axis} ({"y" if axis == 0 else "x"} axis), travel = {travel[axis]}")
+        if axis == 0: axis = 1
+        elif axis == 1: axis = 0
+        snake_coord[axis] += travel[axis]
+        checkpoints[snake_coord[0]][snake_coord[1]] = 1
+  return checkpoints
