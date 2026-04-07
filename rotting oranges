@@ -1,0 +1,30 @@
+def rotting_oranges(grid):
+  moves = [(-1,0),(0,1),(1,0),(0,-1)]
+  queue = []
+  for r in range(len(grid)):
+    for c in range(len(grid[r])):
+      if grid[r][c] == 2:
+        queue.append((r, c))
+  minutes = 0
+  while queue:
+    for i in grid:
+      print(i)
+    for _ in range(len(queue)):
+      orange = queue.pop(0)
+      for move in moves:
+        nextOrange = (orange[0]+move[0],orange[1]+move[1])
+        r,c = nextOrange
+        if 0 <= r <= len(grid)-1 and 0 <= c <= len(grid[0])-1:
+          if grid[r][c] == 1:
+            grid[r][c] += 1
+            queue.append((r,c))
+    if queue:
+      minutes += 1
+  return minutes
+
+grid = [
+[2,1,1],
+[1,1,0],
+[0,1,1]
+]
+print(rotting_oranges(grid))
