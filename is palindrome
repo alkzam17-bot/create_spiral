@@ -1,0 +1,10 @@
+def is_palindrome(n):
+  if n < 0: n*=-1
+  reversed_num = []
+  i = 10
+  while n > 0:
+    reversed_num.append(n%i)
+    n //= i
+  return reversed_num == reversed_num[::-1]
+print(is_palindrome(123))
+print(is_palindrome(121))
